@@ -80,7 +80,7 @@ credit_default:
   source: "UCI Default of Credit Card Clients"
   rows: 30000
   target: default_next_month
-  used_by: ["W1D4", "W3D1", "W3D5"]
+  used_by: ["W1D4", "W3D1"]
   description_en: >
     Credit-card clients with a default flag. Used for evaluation under class imbalance
     (W1D4) and for trees and ensembles (W3D1), where feature importance has a meaning
@@ -169,15 +169,15 @@ moons_toy:
   source: "Built for this course"
   rows: 500
   target: label
-  used_by: ["W1D4", "W1D5", "W3D2", "W3D3", "W3D4", "W3D5"]
+  used_by: ["W1D4", "W1D5", "W3D2", "W3D3", "W3D4"]
   description_en: >
     Two interleaving half-moons — not linearly separable, small enough to train a
-    from-scratch NumPy network on in seconds, and 2-D so the decision boundary can be
-    drawn. Used across W3D2-D5 so students compare like with like all week.
+    from-scratch PyTorch network on in seconds, and 2-D so the decision boundary can be
+    drawn. Used across W3D2-D4 so students compare like with like all week.
   description_ar: >
     هلالان متداخلان — غير قابلين للفصل خطيًا، وصغيران بما يكفي لتدريب شبكة مكتوبة من
-    الصفر بـ NumPy في ثوانٍ، وثنائيا البعد فيمكن رسم حدّ القرار. يُستخدمان من اليوم الثاني
-    إلى الخامس في الأسبوع الثالث ليقارن الطلاب المتشابه بالمتشابه طوال الأسبوع.
+    الصفر بـ PyTorch في ثوانٍ، وثنائيا البعد فيمكن رسم حدّ القرار. يُستخدمان من اليوم الثاني
+    إلى الرابع في الأسبوع الثالث ليقارن الطلاب المتشابه بالمتشابه طوال الأسبوع.
   gotcha_en: "Noise is set to 0.2, so perfect accuracy is impossible — a student chasing 100% is overfitting."
   gotcha_ar: "الضوضاء مضبوطة على ٠٫٢، فالدقة الكاملة مستحيلة؛ ومن يطارد ١٠٠٪ فهو يقع في فرط المطابقة."
 
@@ -190,7 +190,7 @@ mnist:
   source: "http://yann.lecun.com/exdb/mnist/"
   rows: 70000
   target: digit
-  used_by: ["W4D2"]
+  used_by: ["W4D5"]
   description_en: >
     28x28 greyscale handwritten digits. Downloaded and cached by torchvision on first
     use; do not call get_dataset for this one.
@@ -199,6 +199,7 @@ mnist:
     استخدام؛ ولا تُستدعى عبر get_dataset.
   gotcha_en: "MNIST is unrealistically easy. A near-perfect score here says nothing about real vision work — say so."
   gotcha_ar: "MNIST سهلة على نحو غير واقعي، والنتيجة شبه الكاملة فيها لا تدلّ على شيء في الرؤية الحاسوبية الحقيقية — صرّح بذلك."
+
 
 fashion_mnist:
   loader: torchvision
@@ -209,13 +210,15 @@ fashion_mnist:
   source: "https://github.com/zalandoresearch/fashion-mnist"
   rows: 70000
   target: garment_class
-  used_by: ["W4D2"]
+  used_by: ["W3D5", "W4D2"]
   description_en: >
-    Same shape as MNIST, genuinely harder. Used as the "now try it on something real"
-    step after the MNIST CNN, and for filter visualisation.
+    Same shape as MNIST, genuinely harder. The W3D5 dataset, where nn.Linear networks meet an
+    nn.Conv2d network; W4D2 then uses it as the "now try it on something real" step after the
+    MNIST CNN, and for filter visualisation.
   description_ar: >
-    بالحجم نفسه لـ MNIST لكنها أصعب فعليًا. تُستخدم كخطوة «جرّبها الآن على شيء حقيقي»
-    بعد شبكة MNIST، وفي تصوّر المُرشِّحات.
+    بالحجم نفسه لـ MNIST لكنها أصعب فعليًا. وهي مجموعة الأسبوع ٣ اليوم ٥، حيث تلتقي شبكات
+    nn.Linear بشبكة nn.Conv2d؛ ثم يستخدمها الأسبوع ٤ اليوم ٢ كخطوة «جرّبها الآن على شيء حقيقي»
+    بعد شبكة MNIST، وفي تصوّر الفلاتر.
   gotcha_en: "Shirt vs coat vs pullover are confusable at 28x28 even for humans — the confusion matrix shows it."
   gotcha_ar: "التمييز بين القميص والمعطف والكنزة صعب عند دقة ٢٨×٢٨ حتى على الإنسان، وتُظهر مصفوفة الالتباس ذلك."
 
@@ -286,7 +289,7 @@ small_image_5class:
   source: "COCO train2017 CC-BY subset, cropped to one subject per image: bus, cat, dog, pizza, zebra"
   rows: 400
   target: class
-  used_by: ["W4D4", "W4D5", "W6D1", "W6D2", "W6D3", "W6D4", "W6D5"]
+  used_by: ["W4D4", "W6D1", "W6D2", "W6D3", "W6D4", "W6D5"]
   description_en: >
     Five classes — bus, cat, dog, pizza, zebra — 80 images each at 224x224 in
     `ImageFolder` layout, so class 3 is `pizza`. Small on purpose. It carries W4D4-D5 (augmentation,
@@ -342,7 +345,7 @@ unseen_images:
   source: "Held out from the same COCO CC-BY pool as small_image_5class; labels.csv marks the three out-of-class images"
   rows: 25
   target: class
-  used_by: ["W4D5", "W6D4", "W8D1"]
+  used_by: ["W6D4", "W8D1"]
   description_en: >
     Twenty-five images the model has never seen, in the same five classes. Used as the
     honest final check in W6D1 and W6D4, and as what the saved artifact loads and
@@ -367,7 +370,7 @@ reviews_sentiment:
   source: "fancyzhx/amazon_polarity (English) + Ruqiya/Arabic_Reviews_of_SHEIN (Arabic), sampled and balanced"
   rows: 12000
   target: sentiment
-  used_by: ["W5D1", "W5D2", "W5D4", "W5D5"]
+  used_by: ["W5D1", "W5D2", "W5D3", "W5D4", "W5D5"]
   description_en: >
     Product reviews with a sentiment label. Used for the TF-IDF baseline (W5D1), the
     embedding comparison (W5D2) and the BERT fine-tune (W5D5), so every approach is
@@ -388,7 +391,7 @@ sentence_embeddings_sample:
   source: "hermitdave/FrequencyWords token list, embedded with sentence-transformers all-MiniLM-L6-v2 for this course"
   rows: 50000
   target: null
-  used_by: ["W5D2"]
+  used_by: []                # no lab since the W5 rewrite: W5D1 embeds with all-MiniLM-L6-v2 directly
   description_en: >
     Precomputed 384-dimensional sentence-transformer embeddings over a 50,000-token
     vocabulary, so the W5D2 similarity and nearest-neighbour work loads in seconds on
@@ -415,7 +418,7 @@ policy_docs:
   source: "Written for this course"
   rows: 24
   target: null
-  used_by: ["W7D1", "W7D2", "W7D3", "W7D4", "W7D5"]
+  used_by: ["W5D5", "W7D1", "W7D2", "W7D3", "W7D4", "W7D5"]
   description_en: >
     Twenty-four short policy documents for a fictional company. Nothing in them exists in
     any model's training data, so an ungrounded LLM must hallucinate — which is how W7D3
